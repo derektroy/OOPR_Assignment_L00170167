@@ -3,7 +3,7 @@
 # File          :   L00170167_Q3_File_2.py
 # Created       :    
 # Author        :   Derek Troy
-# Version       :   1.0.0
+# Version       :   1.0.5
 # Licensing     :   (C) 2021 Derek Troy LYIT
 #                   Available under GNU Public License (GPL)
 # Description   :   File to Scrape and Parse a Webpage from Apache Server
@@ -21,6 +21,7 @@ r = requests.get(Web_url)
 
 # Parse HTML Code
 soup = bs4.BeautifulSoup(r.content, 'lxml')
+print(soup.prettify())
 
 # Find the headers
 headers = soup.find_all("div", {"class": "section_header"})
