@@ -3,7 +3,7 @@
 # File          :   L00170167_Q5_File_2.py
 # Created       :    
 # Author        :   Derek Troy
-# Version       :   1.0.0
+# Version       :   1.0.2
 # Licensing     :   (C) 2021 Derek Troy LYIT
 #                   Available under GNU Public License (GPL)
 # Description   :   Connect to Remote Host, Create Dirs and Install Curl
@@ -11,7 +11,7 @@
 """
 # import paramiko module
 import paramiko
-import time
+
 
 # configure the login details
 hostname = "192.168.1.60"
@@ -32,6 +32,10 @@ try:
     client.exec_command("mkdir Labs/lab1\n")
     client.exec_command("mkdir Labs/lab2\n")
     client.exec_command("echo letterkenny | sudo -S apt install -y curl\n")
+    stdin, stdout, stderr = client.exec_command("ls -l --time=atime")
+    for line in iter(stdout.readline, ""):
+        print(line, end="")
+    print('finished.')
 except:
     print("[!] Cannot connect to", hostname)
     exit()
