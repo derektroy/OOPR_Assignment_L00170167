@@ -11,7 +11,7 @@
 """
 # Import Required Modules
 import requests
-from bs4 import BeautifulSoup
+import bs4
 
 # What Website are we going to look at
 Web_url = "http://192.168.1.60"
@@ -20,5 +20,22 @@ Web_url = "http://192.168.1.60"
 r = requests.get(Web_url)
 
 # Parse HTML Code
-soup = BeautifulSoup(r.content, 'lxml')
-print(soup.prettify())
+soup = bs4.BeautifulSoup(r.content, 'lxml')
+
+# Find the headers
+headers = soup.find_all("div", {"class": "section_header"})
+print(headers)
+
+
+# Count Apache2
+def returncount(url, word):
+    words = (soup.text.lower())
+    words = words.split()
+    return words.count(word.lower())
+
+
+wordCount = returncount(Web_url, 'Apache2')
+print('Apache2 Word Count =', wordCount)
+
+wordCount = returncount(Web_url, 'Ubuntu')
+print('Ubuntu Word Count =', wordCount)
